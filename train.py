@@ -14,7 +14,7 @@ def cost_function(y_train, X_train, Theta, reg_mode = True, l = 0.1):
     for i in range(m):
         y[i,y_train[i]] = 1
     
-    cost = np.sum(np.multiply(y,np.log(h))+np.multiply((1-y),np.log(1-h)), axis=0)/m  # k
+    cost = -1*np.sum(np.multiply(y,np.log(h))+np.multiply((1-y),np.log(1-h)), axis=0)/m  # k
     grad = np.dot(X.transpose(), (h-y))/m # n+1 X k
 
     if reg_mode:
@@ -37,7 +37,7 @@ def gradient_descent(y_train, X_train, Theta, alpha, rounds = 400):
         
         
         if i>=1 :
-            tmp = np.abs(cost_history[i]) >= np.abs(cost_history[i-1])
+            tmp = cost_history[i] >= cost_history[i-1]
             if tmp.any():
                 loc = np.where(tmp)[0]
                 alpha[loc] = alpha[loc]/3
