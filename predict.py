@@ -4,8 +4,8 @@ def sigmoid(matrix):
     return 1/(1+np.exp(-matrix))
 
 def softmax(y_pred):
-    sum = np.sum(y_pred,axis=1)
-    return y_pred/sum[:,np.newaxis]
+    sum = np.sum(np.exp(y_pred),axis=1)
+    return np.exp(y_pred)/sum[:,np.newaxis]
 
 def predict(X_train, Theta):
     X = np.hstack((np.ones((X_train.shape[0],1)), X_train))
